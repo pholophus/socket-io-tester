@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+      #form { background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px); }
+      #input { border: none; padding: 0 1rem; flex-grow: 1; border-radius: 2rem; margin: 0.25rem; }
+      #input:focus { outline: none; }
+      #form > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
+
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages > li { padding: 0.5rem 1rem; }
+      #messages > li:nth-child(odd) { background: #efefef; }
+    </style>
+  </head>
+  <body>
+    <ul id="messages"></ul>
+    <form id="form" action="">
+      <input id="input" autocomplete="off" /><button>Send</button>
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+      // var socket = io("https://peerjs.appserver.projectoasis.io/");
+
+      // async function fetchMovies404() {
+      //   const response = await fetch('https://attributednft.projectoasis.io/968.json');
+        
+      //   response.ok;     // => false
+      //   response.status; // => 404
+      //   const text = await response.json();
+      //   console.log("eehhh")
+      //   return text;
+      // }
+
+      // fetchMovies404().then(text => {
+      //   console.log("text",text)
+      // });
+
+    // (async () => {
+    //   console.log(await b())
+    // })
+
+    // a().then((v) => {
+    //     console.log(v)
+    //   })
+
+
+      // async function a(){
+      //   const metadata = {
+      //       name: "",
+      //       description: "",
+      //       quantity: 0,
+      //       skin_name: "",
+      //       atlas: "",
+      //       type: "others"
+      //     };
+      //   await fetch("https://attributednft.projectoasis.io/968.json")
+      //     .then((response) => response.json())
+      //     .then((data) => {
+          
+      //     console.log("latert")
+
+      //       metadata.name = data.name;
+      //       metadata.description = data.description;
+      //       metadata.skin_name = "";
+      //       metadata.atlas = "";
+
+      //     })
+      //     .catch(() => {
+      //       metadata.name = "";
+      //       metadata.description = "";
+      //       metadata.skin_name = "";
+      //       metadata.atlas = "";
+      //     });
+        
+      //   return metadata
+      // }
+
+      // console.log(a())
+
+      // a().then((v) => {
+      //   console.log(v)
+      // })
+
+      const requestInputOnboard = {
+        wallet: '0xdc025BBED2baa3897c511C3aA08aA5A9F40676dF',
+        banner: 'https://ipfs-cluster-2.appserver.projectoasis.io/ipfs/QmSSQLvtN3LGaEFurTiEfFVuxVXJrteG7RJiCz9kNmGSDm',
+        arcade: 'https://ipfs-cluster-2.appserver.projectoasis.io/ipfs/QmVcNkHMSWSaJSE4NREfyaiVMea4vyq8zEGfjyquNqD9dd/arc2.PNG',
+        screenshot: [
+          'https://ipfs-cluster-2.appserver.projectoasis.io/ipfs/QmSJ93qfKM2B9BGYmWs6VwXf7KdPcRU7jVvdCDANnQbHvg/favicon.ico',
+          'https://ipfs-cluster-2.appserver.projectoasis.io/ipfs/QmSJ93qfKM2B9BGYmWs6VwXf7KdPcRU7jVvdCDANnQbHvg/fullscreen-button.png'
+        ],
+        gameName: 'asdf112345678123',
+        description: 'asdfasd1234',
+        developer: 'asdf123456',
+        youtube: 'sdfsd12345',
+        facebook: 'sdf12345',
+        instagram: 'sdsxc1',
+        twitter: 'cccsadcdweqdwqe1',
+        linkedin: 'zzzz12',
+        genre: [ 'SinglePlayer', 'MultiPlayer' ],
+        gameURL:"https://spheron.mypinata.cloud/ipfs/QmSqGDYNiNYLdZX358hx8cKDVmirACDWPmAY9Uvz4XeETQ",
+        arcadeSize: "1"
+      }
+
+      var socket = io("http://localhost:3010");
+      // var socket = io("https://peerjs.appserver.projectoasis.io/")
+
+      var messages = document.getElementById('messages');
+      var form = document.getElementById('form');
+      var input = document.getElementById('input');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (input.value) {
+          // socket.emit('chat message trigger', input.value);
+          //get_user_NFTs
+          socket.emit('get_user_NFTs', "5fde173df22b59f018edd73f7db8f5d647a007f5843da1210ca2ae68da1598fd");
+          // socket.emit('get_inventory_weapons', "0x971B9fCa822830BF66e1bD72fB52a887A18eefE2")
+          // socket.emit('get_inventory_weapons', "0x971B9fCa822830BF66e1bD72fB52a887A18eefE2")
+          // socket.emit('register_player', "0x971B9fCa822830BF66e1bD72fB52a887A18eefE2")
+          //https://ipfs.io/ipfs/bafybeih2sc4vgcjc6nyi5p3arnadxuav34rsnogkagvyec7p247cova3uq/Axe.png
+          // socket.emit("buy_weapon", "0x971B9fCa822830BF66e1bD72fB52a887A18eefE2" ,"https://ipfs.io/ipfs/bafybeih2sc4vgcjc6nyi5p3arnadxuav34rsnogkagvyec7p247cova3uq/Axe.png")
+          // socket.emit("update_character", "0x971B9fCa822830BF66e1bD72fB52a887A18eefE2" ,"https://ipfs.io/ipfs/bafybeih2sc4vgcjc6nyi5p3arnadxuav34rsnogkagvyec7p247cova3uq/Axe.png")
+          // socket.emit("get_user_games", "0xdc025BBED2baa3897c511C3aA08aA5A9F40676dF")
+          // socket.emit("get_onboard_game_location", requestInputOnboard)
+          input.value = '';
+        }
+      });
+
+      // socket.on('output_inventory_weapons', function(msg) {
+      socket.on('output_user_NFTs', function(msg) {
+      // socket.on('output_current_weapon', function(msg) {
+        // socket.on('output_user_games', function(msg) {
+        // socket.on('output_onboard_game_location', function(msg) {
+        console.log("msg", msg)
+        var item = document.createElement('li');
+        item.textContent = msg;
+        messages.appendChild(item);
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+    </script>
+  </body>
+</html>
